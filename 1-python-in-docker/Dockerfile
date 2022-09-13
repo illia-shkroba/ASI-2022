@@ -8,3 +8,13 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY lib/data-processor/setup.py .
 COPY lib/data-processor/src src
 RUN pip install --no-cache-dir -e .
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY app.py .
+
+ENTRYPOINT ["streamlit"]
+CMD ["run", "app.py"]
